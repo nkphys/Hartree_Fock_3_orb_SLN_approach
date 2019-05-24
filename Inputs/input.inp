@@ -1,14 +1,14 @@
 PBC=true
-Xsite=12
-Ysite=12
+Xsite=8
+Ysite=8
 TwistedBoundaryCond_mx=0
 TwistedBoundaryCond_my=0
 TBC_cellsX=32
 TBC_cellsY=32
-Total No. of particles=576
+Total No. of particles=256
 RandomSeed=13
 
-Pnictides_Hopping=true
+Pnictides_Hopping=false
 Nearest_Neigh_Hopping_t2g_basis_row0=0.5 0.0 0.0
 Nearest_Neigh_Hopping_t2g_basis_row1=0.0 0.5 0.0
 Nearest_Neigh_Hopping_t2g_basis_row2=0.0 0.0 0.5
@@ -28,11 +28,12 @@ wn=0.5
 BroydenSecondMethodCounter=20
 
 
-J_HUND=0.0
-U_Onsite=0.0
+J_HUND=2.5
+U_Onsite=10.0
+Lambda_SOC=0.0
 
 No_of_SelfConsistency_iters=200000
-Convergence_Error=0.00001
+Convergence_Error=0.0001
 Read_initial_OPvalues=0
 Read_initial_OPvalues_file=OrderParams_AFM.txt
 Write_Final_OPvalues_file=OrderParams_OUTPUT.txt

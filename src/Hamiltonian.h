@@ -416,6 +416,7 @@ void Hamiltonian::HTBCreate(){
 yz_up(site=0),xz_up(site=0),xy_up(site=0), yz_dn(site=0),xz_dn(site=0),xy_dn(site=0)....site(n)...
 */
 
+
     double l_i;
     int mx=Parameters_.TBC_mx;
     int my=Parameters_.TBC_my;
@@ -657,6 +658,7 @@ yz_up(site=0),xz_up(site=0),xy_up(site=0), yz_dn(site=0),xz_dn(site=0),xy_dn(sit
 
 
 
+    //Disorder
     int site;
     for(int ix=0;ix<lx_;ix++){
         for(int iy=0;iy<ly_;iy++){
@@ -669,6 +671,33 @@ yz_up(site=0),xz_up(site=0),xy_up(site=0), yz_dn(site=0),xz_dn(site=0),xy_dn(sit
             }
         }
     }
+
+    //Spin-orbit couplingXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    //For Spin orbit coupling--------------------------
+    Mat_2_Complex_doub A_SOC;
+    A_SOC.resize(6);
+    for(int i=0;i<6;i++){
+        A_SOC[i].resize(6);
+    }
+    A_SOC[0][1]=iota_complex;A_SOC[1][0]=-1.0*iota_complex;
+    A_SOC[1][5]=iota_complex;A_SOC[5][1]=-1.0*iota_complex;
+    A_SOC[0][5]=-1.0*one_complex;A_SOC[5][0]=-1.0*one_complex;
+
+    A_SOC[3][4]=-1.0*iota_complex;A_SOC[4][3]=iota_complex;
+    A_SOC[4][2]=iota_complex;A_SOC[2][4]=-1.0*iota_complex;
+    A_SOC[3][2]=one_complex;A_SOC[2][3]=one_complex;
+    //-------------------------------------------------
+    for(int i=0;i<ns_;i++) {
+        for(int state1=0;state1<6;state1++) {
+            for(int state2=0;state2<6;state2++) {
+                a=Coordinates_.Nc_dof(i,state1);
+                b=Coordinates_.Nc_dof(i,state2);
+
+                HTB_(a,b)+=complex<double>(0.5,0.0)*Parameters_.Lambda_SOC*A_SOC[state1][state2];
+            }
+        }
+    }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 

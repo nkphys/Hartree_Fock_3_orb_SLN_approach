@@ -13,6 +13,7 @@ public:
     double mus,Total_Particles,pi, mu_old;
     double J_Hund;
     double U_onsite;
+    double Lambda_SOC;
     double Disorder_Strength, RandomDisorderSeed;
     bool PBC;
     bool PNICTIDES_HOPPING;
@@ -73,6 +74,7 @@ void Parameters::Initialize(string inputfile_){
     Disorder_Strength = matchstring(inputfile_,"Disorder_Strength");
     J_Hund = matchstring(inputfile_,"J_HUND");
     U_onsite = matchstring(inputfile_,"U_Onsite");
+    Lambda_SOC = matchstring(inputfile_, "Lambda_SOC");
 
     alpha_OP = matchstring(inputfile_,"alpha_OP");
     w_minus1 = matchstring(inputfile_,"w_minus1");
